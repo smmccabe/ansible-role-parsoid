@@ -15,7 +15,11 @@
 
 - include: install_package_names.yml
 
+- name: ensure config directory exists
+  file:
+    path: /etc/mediawiki/parsoid
+    state: directory
+
 - template:
     src: config.yaml.j2
     dest: /etc/mediawiki/parsoid/config.yaml
-  sudo: true

@@ -6,4 +6,3 @@
     https://deb.nodesource.com/gpgkey/nodesource.gpg.key
   args:
     creates: /root/68576280.gpg
-  sudo: yes
