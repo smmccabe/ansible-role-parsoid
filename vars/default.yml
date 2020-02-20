@@ -1,3 +1,2 @@
 ---
-package_names:
-- parsoid
+parsoid_package_name: parsoid

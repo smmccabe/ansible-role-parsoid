@@ -1,5 +1,4 @@
 ---
-parsoid_key_local_file: /root/parsoid.gpg
 parsoid_key_fingerprint: AF380A3036A03444
 parsoid_worker_heartbeat_timeout: 300000
 parsoid_logging_level: "info"
@@ -23,4 +22,4 @@ parsoid_mw_apis:
   #        'X-Forwarded-Proto': 'https'
 # https://github.com/nodesource/distributions#manual-installation
 # builds >= v7.x are NOT available for Debian Wheezy
-nodesource_repo: node_6.x
+nodesource_repo: node_12.x

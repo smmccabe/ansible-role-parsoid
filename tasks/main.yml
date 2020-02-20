@@ -1,25 +1,31 @@
 ---
-- include: compat.yml
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ansible_distribution}}-{{ansible_distribution_version}}.yml"
+    - "{{ansible_distribution}}-{{ansible_distribution_major_version}}.yml"
+    - "{{ansible_distribution}}.yml"
+    - "{{ansible_os_family}}.yml"
+    - default.yml
 
-- include: include_vars.yml
-
-- include: get_key_nodesource.yml
-
-- include: Debian.yml
+- include: debian_setup.yml
   when: ansible_os_family == 'Debian'
 
-# - include: RHEL.yml
-#   when: >
-#     ansible_distribution == 'CentOS' or
-#     ansible_distribution == 'Red Hat Enterprise Linux'
-
-- include: install_package_names.yml
+- name: Install parsoid
+  package:
+    name: "{{ parsoid_package_name }}"
+    state: present
 
 - name: ensure config directory exists
   file:
     path: /etc/mediawiki/parsoid
     state: directory
 
-- template:
+- name: setup config
+  template:
     src: config.yaml.j2
     dest: /etc/mediawiki/parsoid/config.yaml
+    
+- name: restart parsoid
+  service:
+    name: parsoid
+    state: restarted    

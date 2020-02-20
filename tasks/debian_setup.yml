@@ -1,0 +1,25 @@
+---
+
+- name: install apt-transport-https
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Add mediawiki key
+  apt_key:
+    id: "{{parsoid_key_fingerprint}}"
+    state: present
+
+- name: Add mediawiki repo
+  apt_repository:
+    repo: "deb https://releases.wikimedia.org/debian jessie-mediawiki main"
+    state: present
+
+- name: Add nodesource key
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+    
+- name: Add nodesource repo
+  apt_repository:
+    repo: "deb https://deb.nodesource.com/{{nodesource_repo}} {{ansible_lsb.codename|lower}} main"
